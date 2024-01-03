@@ -7,8 +7,8 @@ RUN go mod download
 
 COPY ./ ./
 
-RUN go build -o eva
+RUN go build -o tod
 
 FROM gcr.io/distroless/base-debian12:nonroot
-COPY --from=builder /app/eva /eva
-ENTRYPOINT [ "/eva" ]
+COPY --from=builder /app/tod /tod
+ENTRYPOINT [ "/tod" ]
