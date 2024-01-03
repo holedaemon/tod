@@ -235,5 +235,5 @@ const html = `<!DOCTYPE html>
 </html>`
 
 func (s *Server) getOverlay(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(html))
+	w.Write([]byte(html)) //nolint:errcheck
 }

@@ -33,7 +33,7 @@ func Open(file string) (*DB, error) {
 
 // Close closes a DB.
 func (db *DB) Close() {
-	db.Close()
+	db.db.Close()
 }
 
 // SetToken sets a Spotify OAuth token.
@@ -43,7 +43,7 @@ func (db *DB) SetToken(id string, token *Token) error {
 		return err
 	}
 
-	defer tx.Rollback()
+	defer tx.Rollback() //nolint:errcheck
 
 	tokens, err := tx.CreateBucketIfNotExists([]byte("tokens"))
 	if err != nil {
@@ -69,7 +69,7 @@ func (db *DB) Token(id string) (*Token, error) {
 		return nil, err
 	}
 
-	defer tx.Rollback()
+	defer tx.Rollback() //nolint:errcheck
 
 	tokens := tx.Bucket([]byte("tokens"))
 	if tokens == nil {
