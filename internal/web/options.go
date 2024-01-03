@@ -1,7 +1,7 @@
 package web
 
 import (
-	"github.com/holedaemon/eva-music/internal/db"
+	"github.com/holedaemon/tod/internal/db"
 	spotifyauth "github.com/zmb3/spotify/v2/auth"
 )
 

@@ -9,7 +9,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/render"
 	"github.com/gofrs/uuid/v5"
-	"github.com/holedaemon/eva-music/internal/db"
+	"github.com/holedaemon/tod/internal/db"
 	"github.com/zikaeroh/ctxlog"
 	"github.com/zmb3/spotify/v2"
 	spotifyauth "github.com/zmb3/spotify/v2/auth"

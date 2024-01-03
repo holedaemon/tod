@@ -3,7 +3,7 @@ package web
 import (
 	"net/http"
 
-	"github.com/holedaemon/eva-music/internal/db"
+	"github.com/holedaemon/tod/internal/db"
 	"golang.org/x/oauth2"
 )
 

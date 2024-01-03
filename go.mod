@@ -1,4 +1,4 @@
-module github.com/holedaemon/eva-music
+module github.com/holedaemon/tod
 
 go 1.21.3
 

@@ -6,20 +6,20 @@ import (
 	"os"
 
 	"github.com/caarlos0/env/v7"
-	"github.com/holedaemon/eva-music/internal/db"
-	"github.com/holedaemon/eva-music/internal/web"
+	"github.com/holedaemon/tod/internal/db"
+	"github.com/holedaemon/tod/internal/web"
 	"github.com/zikaeroh/ctxlog"
 	spotifyauth "github.com/zmb3/spotify/v2/auth"
 	"go.uber.org/zap"
 )
 
 type options struct {
-	Addr                string   `env:"EVA_ADDR"`
-	DB                  string   `env:"EVA_DB"`
-	SpotifyClientID     string   `env:"EVA_SPOTIFY_CLIENT_ID"`
-	SpotifyClientSecret string   `env:"EVA_SPOTIFY_CLIENT_SECRET"`
-	SpotifyScopes       []string `env:"EVA_SPOTIFY_SCOPES"`
-	SpotifyRedirectURL  string   `env:"EVA_SPOTIFY_REDIRECT_URL"`
+	Addr                string   `env:"TOD_ADDR"`
+	DB                  string   `env:"TOD_DB"`
+	SpotifyClientID     string   `env:"TOD_SPOTIFY_CLIENT_ID"`
+	SpotifyClientSecret string   `env:"TOD_SPOTIFY_CLIENT_SECRET"`
+	SpotifyScopes       []string `env:"TOD_SPOTIFY_SCOPES"`
+	SpotifyRedirectURL  string   `env:"TOD_SPOTIFY_REDIRECT_URL"`
 }
 
 func main() {
