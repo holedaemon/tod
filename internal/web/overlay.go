@@ -4,7 +4,6 @@ import "net/http"
 
 const html = `<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -127,9 +126,13 @@ const html = `<!DOCTYPE html>
             return fetch("/np/" + id)
                 .then(function (response) {
                     if (response.status === 404) {
-                        console.error("page returned 404");
-                        return;
+                        unauthorizedCard();
+                        return timeoutPromise(10000)
+                            .then(function () {
+                                return fetchSong(id);
+                            });
                     }
+
                     if (response.status !== 200) {
                         updateCard(null);
                         return timeoutPromise(10000)
@@ -147,7 +150,8 @@ const html = `<!DOCTYPE html>
                             return fetchSong(id);
                         })
                 })
-                .catch(function (error) {
+                .catch(function (response) {
+                    console.log(response);
                     return timeoutPromise(10000)
                         .then(function () {
                             return fetchSong(id);
@@ -163,6 +167,13 @@ const html = `<!DOCTYPE html>
 			$("#song-title").text("");
 		}
 
+        function unauthorizedCard() {
+            $("#artist-top").text("you");
+            $("#artist-middle").text("must");
+            $("#artist-bottom").text("log in");
+            $("#album-title").text("your shit isn't authed");
+        }
+
         function updateCard(data) {
 			clearCard();
 
@@ -170,8 +181,6 @@ const html = `<!DOCTYPE html>
                 $("#artist-top").text("there's");
                 $("#artist-middle").text("nothing");
                 $("#artist-bottom").text("playing");
-                $("#album-title").text("");
-                $("#song-title").text("");
                 return;
             }
 
@@ -223,7 +232,6 @@ const html = `<!DOCTYPE html>
         });
     </script>
 </body>
-
 </html>`
 
 func (s *Server) getOverlay(w http.ResponseWriter, r *http.Request) {
