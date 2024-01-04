@@ -95,12 +95,12 @@ func (s *Server) getSpotifyCallback(w http.ResponseWriter, r *http.Request) {
 
 	st := r.FormValue("state")
 	if st == "" {
-		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+		writeError(w, http.StatusBadRequest)
 		return
 	}
 
 	if _, ok := s.states[st]; !ok {
-		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+		writeError(w, http.StatusBadRequest)
 		return
 	}
 
