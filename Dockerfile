@@ -11,7 +11,7 @@ RUN go build -o tod
 
 FROM gcr.io/distroless/base-debian12:latest
 
-WORKDIR /app
+VOLUME /data
 
 COPY --from=builder /app/tod /
 

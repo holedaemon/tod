@@ -2,14 +2,19 @@ package db
 
 import (
 	"encoding/json"
+	"errors"
+	"os"
+	"path/filepath"
 	"time"
 
 	"go.etcd.io/bbolt"
 )
 
 const (
-	defaultPerm = 0600
-	defaultName = "tod.db"
+	defaultFilePerm = 0600
+	defaultDirPerm  = 0755
+	defaultDir      = "data"
+	defaultName     = "tod.db"
 )
 
 type Token struct {
@@ -26,7 +31,15 @@ type DB struct {
 
 // Open opens a database file and returns a *DB.
 func Open() (*DB, error) {
-	db, err := bbolt.Open(defaultName, defaultPerm, nil)
+	err := os.Mkdir(defaultDir, defaultDirPerm)
+	if err != nil {
+		if !errors.Is(err, os.ErrExist) {
+			return nil, err
+		}
+	}
+
+	path := filepath.Join(defaultDir, defaultName)
+	db, err := bbolt.Open(path, defaultFilePerm, nil)
 	if err != nil {
 		return nil, err
 	}
