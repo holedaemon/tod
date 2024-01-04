@@ -9,6 +9,10 @@ COPY ./ ./
 
 RUN go build -o tod
 
-FROM gcr.io/distroless/base-debian12:nonroot
-COPY --from=builder /app/tod /tod
+FROM gcr.io/distroless/base-debian12:latest
+
+WORKDIR /app
+
+COPY --from=builder /app/tod /
+
 ENTRYPOINT [ "/tod" ]

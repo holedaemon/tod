@@ -7,7 +7,10 @@ import (
 	"go.etcd.io/bbolt"
 )
 
-const defaultFilePerm = 0600
+const (
+	defaultPerm = 0600
+	defaultName = "tod.db"
+)
 
 type Token struct {
 	AccessToken  string    `json:"access_token"`
@@ -22,8 +25,8 @@ type DB struct {
 }
 
 // Open opens a database file and returns a *DB.
-func Open(file string) (*DB, error) {
-	db, err := bbolt.Open(file, defaultFilePerm, nil)
+func Open() (*DB, error) {
+	db, err := bbolt.Open(defaultName, defaultPerm, nil)
 	if err != nil {
 		return nil, err
 	}

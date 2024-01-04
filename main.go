@@ -15,7 +15,6 @@ import (
 
 type options struct {
 	Addr                string   `env:"TOD_ADDR"`
-	DB                  string   `env:"TOD_DB"`
 	SpotifyClientID     string   `env:"TOD_SPOTIFY_CLIENT_ID"`
 	SpotifyClientSecret string   `env:"TOD_SPOTIFY_CLIENT_SECRET"`
 	SpotifyScopes       []string `env:"TOD_SPOTIFY_SCOPES"`
@@ -36,7 +35,7 @@ func main() {
 	logger := ctxlog.New(false)
 	ctx := ctxlog.WithLogger(context.Background(), logger)
 
-	file, err := db.Open(opts.DB)
+	file, err := db.Open()
 	if err != nil {
 		logger.Fatal("error opening db file", zap.Error(err))
 	}
